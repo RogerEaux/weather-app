@@ -1,4 +1,4 @@
-import heavyWeather from '../images/weather.svg';
+import weatherReport from '../images/weather.svg';
 
 const createHeader = () => {
   const header = document.createElement('header');
@@ -6,7 +6,7 @@ const createHeader = () => {
   const title = document.createElement('h1');
   const headerContainer = document.createElement('div');
 
-  logo.src = heavyWeather;
+  logo.src = weatherReport;
   title.textContent = 'Weather Report';
 
   headerContainer.append(logo, title);
