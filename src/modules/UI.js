@@ -1,17 +1,28 @@
 import weatherReport from '../images/weather.svg';
 import changeWeather from './API';
 
+const handleChangeTempUnits = () => {
+  const units = document.querySelectorAll('.unit');
+
+  units.forEach((unit) => {
+    unit.classList.toggle('hidden');
+  });
+};
+
 const createHeader = () => {
   const header = document.createElement('header');
+  const headerContainer = document.createElement('div');
   const logo = document.createElement('img');
   const title = document.createElement('h1');
-  const headerContainer = document.createElement('div');
+  const CtoF = document.createElement('button');
 
   logo.src = weatherReport;
   title.textContent = 'Weather Report';
+  CtoF.textContent = 'C/F';
+  CtoF.addEventListener('click', handleChangeTempUnits);
 
   headerContainer.append(logo, title);
-  header.append(headerContainer);
+  header.append(headerContainer, CtoF);
 
   return header;
 };
@@ -45,8 +56,8 @@ const createTempContainer = () => {
 
   tempContainer.classList = 'temp';
   icon.classList = 'icon';
-  temperatureC.classList = 'temperatureC';
-  temperatureF.classList = 'temperatureF';
+  temperatureC.classList = 'unit temperatureC';
+  temperatureF.classList = 'unit hidden temperatureF';
 
   tempContainer.append(icon, temperatureC, temperatureF);
 
@@ -81,12 +92,12 @@ const createDetailsContainer = () => {
 
   detailsContainer.classList = 'details';
 
-  feelsLikeC.classList = 'feelsLikeC';
-  feelsLikeF.classList = 'feelsLikeF';
+  feelsLikeC.classList = 'unit feelsLikeC';
+  feelsLikeF.classList = 'unit hidden feelsLikeF';
   precipitation.classList = 'precipitation';
   humidity.classList = 'humidity';
-  windKPH.classList = 'windKPH';
-  windMPH.classList = 'windMPH';
+  windKPH.classList = 'unit windKPH';
+  windMPH.classList = 'unit hidden windMPH';
 
   detailsContainer.append(
     feelsLikeC,
@@ -119,10 +130,10 @@ const createMaxMinContainer = () => {
 
   maxMinContainer.classList = 'maxMin';
   icon.classList = 'icon';
-  maxC.classList = 'maxC';
-  maxF.classList = 'maxF';
-  minC.classList = 'minC';
-  minF.classList = 'minF';
+  maxC.classList = 'unit maxC';
+  maxF.classList = 'unit hidden maxF';
+  minC.classList = 'unit minC';
+  minF.classList = 'unit hidden minF';
 
   maxMinContainer.append(icon, maxC, maxF, minC, minF);
 
@@ -132,7 +143,7 @@ const createMaxMinContainer = () => {
 const createForecastContainer = (index) => {
   const forecastContainer = document.createElement('div');
 
-  forecastContainer.classList = `day${index}`;
+  forecastContainer.classList = `day day${index}`;
 
   forecastContainer.append(createMaxMinContainer());
 
