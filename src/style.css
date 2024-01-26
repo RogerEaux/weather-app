@@ -1,3 +1,16 @@
+@font-face {
+  font-family: Cloudy;
+  src: url(./fonts/Cloud.otf);
+}
+
+:root {
+  font-family: Helvetica, Arial, sans-serif;
+  --dark-blue: #31255a;
+  --blue: #75b4e3;
+  --light-blue: #8fe0ff;
+  --shadow: 0px 0px 8px var(--blue);
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -15,14 +28,18 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 16px;
+  background: linear-gradient(white, var(--light-blue), var(--blue));
+  box-shadow: var(--shadow);
 }
 
 header > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
   font-size: 1.2rem;
+  font-family: Cloudy;
+  color: #31255a;
 }
 
 header > div > img {
@@ -30,10 +47,142 @@ header > div > img {
   width: auto;
 }
 
+main {
+  flex: 1;
+  width: 80%;
+  display: grid;
+  grid-template:
+    'input' 2rem
+    'current' 1fr
+    'next' 1fr / 1fr;
+  align-self: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.search {
+  grid-area: input;
+  align-self: center;
+  display: grid;
+  grid-template-columns: 1fr 6rem;
+  gap: 4px;
+}
+
+.search > * {
+  padding: 4px;
+  border-radius: 5px;
+}
+
+.search input {
+  outline: none;
+  border: 2px solid var(--blue);
+  box-shadow: var(--shadow);
+}
+
+.search input:focus {
+  border: 2px solid var(--dark-blue);
+}
+
+.search button {
+  font-weight: 700;
+  border: none;
+  color: var(--dark-blue);
+  background-color: var(--blue);
+  cursor: pointer;
+}
+
+.current {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.current > * {
+  justify-self: center;
+}
+
+.mini {
+  display: grid;
+  grid-template:
+    'icon temp' 1fr
+    'location location' 1.2rem
+    '. time' 1.2rem;
+  align-items: center;
+  gap: 4px;
+  padding: 16px;
+  border: 2px solid var(--blue);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.mini * {
+  justify-self: end;
+}
+
+.mini .icon {
+  grid-area: icon;
+}
+
+.mini .temperatureC,
+.mini .temperatureF {
+  grid-area: temp;
+  font-size: 2.5rem;
+}
+
+.mini .temperatureF {
+  visibility: hidden;
+}
+
+.mini .location {
+  grid-area: location;
+}
+
+.mini .time {
+  grid-area: time;
+}
+
+.details {
+  width: max-content;
+  display: grid;
+  grid-template:
+    'condition' 1fr
+    'feels' 1fr
+    'humidity' 1fr
+    'wind' 1fr;
+  gap: 4px;
+  padding: 16px;
+  border: 2px solid var(--blue);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.details > * {
+  align-self: center;
+}
+
+.details .feelsLikeC,
+.details .feelsLikeF {
+  grid-area: feels;
+}
+
+.details .windKPH,
+.details .windMPH {
+  grid-area: wind;
+}
+
+.details .feelsLikeF,
+.details .windMPH {
+  visibility: hidden;
+}
+
 footer {
   display: flex;
   justify-content: center;
   gap: 8px;
   font-size: 1rem;
+  font-family: Cloudy;
   padding: 16px;
+  color: var(--dark-blue);
+  background: linear-gradient(var(--blue), var(--light-blue), white);
+  box-shadow: var(--shadow);
 }
