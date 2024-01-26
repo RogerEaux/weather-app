@@ -64,7 +64,7 @@ const createTempContainer = () => {
   return tempContainer;
 };
 
-const createWeatherMini = () => {
+const createMiniContainer = () => {
   const miniContainer = document.createElement('div');
   const condition = document.createElement('p');
   const location = document.createElement('p');
@@ -80,7 +80,7 @@ const createWeatherMini = () => {
   return miniContainer;
 };
 
-const createDetailsContainer = () => {
+const createCurrentDetailsContainer = () => {
   const detailsContainer = document.createElement('div');
 
   const feelsLikeC = document.createElement('p');
@@ -115,7 +115,7 @@ const createCurrentWeather = () => {
   const currentWeather = document.createElement('div');
 
   currentWeather.classList = 'current';
-  currentWeather.append(createWeatherMini(), createDetailsContainer());
+  currentWeather.append(createMiniContainer(), createCurrentDetailsContainer());
 
   return currentWeather;
 };
@@ -140,12 +140,33 @@ const createMaxMinContainer = () => {
   return maxMinContainer;
 };
 
+const createForecastDetailsContainer = () => {
+  const detailsContainer = document.createElement('div');
+  const averageHumidity = document.createElement('p');
+  const precipitation = document.createElement('p');
+  const maxWindC = document.createElement('p');
+  const maxWindF = document.createElement('p');
+
+  detailsContainer.classList = 'details';
+  averageHumidity.classList = 'humidity';
+  precipitation.classList = 'precipitation';
+  maxWindC.classList = 'unit maxWindKPH';
+  maxWindF.classList = 'unit hidden maxWindMPH';
+
+  detailsContainer.append(precipitation, averageHumidity, maxWindC, maxWindF);
+
+  return detailsContainer;
+};
+
 const createForecastContainer = (index) => {
   const forecastContainer = document.createElement('div');
 
   forecastContainer.classList = `day day${index}`;
 
-  forecastContainer.append(createMaxMinContainer());
+  forecastContainer.append(
+    createMaxMinContainer(),
+    createForecastDetailsContainer(),
+  );
 
   return forecastContainer;
 };
