@@ -49,6 +49,12 @@ const getForecastWeather = (allWeather) => {
     forecast.days[i].minF = allWeather.forecast.forecastday[i].day.mintemp_f;
     forecast.days[i].precipitation =
       allWeather.forecast.forecastday[i].day.daily_chance_of_rain;
+    forecast.days[i].humidity =
+      allWeather.forecast.forecastday[i].day.avghumidity;
+    forecast.days[i].maxWindKPH =
+      allWeather.forecast.forecastday[i].day.maxwind_kph;
+    forecast.days[i].maxWindMPH =
+      allWeather.forecast.forecastday[i].day.maxwind_mph;
   }
 
   return forecast;
@@ -95,10 +101,39 @@ const changeCurrentDetails = (weather) => {
   windMPH.textContent = `Wind: ${weather.current.windMPH}MPH`;
 };
 
-const changeForecast = (weather) => {
-  const icon = document.querySelector('.forecast .icon');
+const changeForecastMaxMin = (weather) => {
+  weather.forecast.days.forEach((day, index) => {
+    const icon = document.querySelector(`.forecast .day${index} .icon`);
+    const maxC = document.querySelector(`.forecast .day${index} .maxC`);
+    const maxF = document.querySelector(`.forecast .day${index} .maxF`);
+    const minC = document.querySelector(`.forecast .day${index} .minC`);
+    const minF = document.querySelector(`.forecast .day${index} .minF`);
 
-  icon.src = weather.forecast;
+    icon.src = day.icon;
+    maxC.textContent = `Max: ${day.maxC}°C`;
+    maxF.textContent = `Max: ${day.maxF}°F`;
+    minC.textContent = `Min: ${day.minC}°C`;
+    minF.textContent = `Min: ${day.minF}°F`;
+  });
+};
+
+const changeForecastDetails = (weather) => {
+  weather.forecast.days.forEach((day, index) => {
+    const precipitation = document.querySelector(
+      `.forecast .day${index} .precipitation`,
+    );
+    const humidity = document.querySelector(`.forecast .day${index} .humidity`);
+    const maxWindKPH = document.querySelector(
+      `.forecast .day${index} .maxWindKPH`,
+    );
+    const maxWindMPH = document.querySelector(
+      `.forecast .day${index} .maxWindMPH`,
+    );
+    precipitation.textContent = `Precipitation: ${day.precipitation}%`;
+    humidity.textContent = `Humidity: ${day.humidity}%`;
+    maxWindKPH.textContent = `Max wind: ${day.maxWindKPH}KPH`;
+    maxWindMPH.textContent = `Max wind: ${day.maxWindMPH}MPH`;
+  });
 };
 
 const changeWeather = (location) => {
@@ -106,6 +141,8 @@ const changeWeather = (location) => {
     console.log(weather);
     changeCurrentMini(weather);
     changeCurrentDetails(weather);
+    changeForecastMaxMin(weather);
+    changeForecastDetails(weather);
   });
 };
 
