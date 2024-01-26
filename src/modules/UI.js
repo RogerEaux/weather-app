@@ -129,10 +129,10 @@ const createMaxMinContainer = () => {
   return maxMinContainer;
 };
 
-const createForecastContainer = () => {
+const createForecastContainer = (index) => {
   const forecastContainer = document.createElement('div');
 
-  forecastContainer.classList = 'day';
+  forecastContainer.classList = `day${index}`;
 
   forecastContainer.append(createMaxMinContainer());
 
@@ -141,14 +141,13 @@ const createForecastContainer = () => {
 
 const createForecastWeather = () => {
   const forecasteWeather = document.createElement('div');
+  const forecastDays = 3;
 
   forecasteWeather.classList = 'forecast';
 
-  forecasteWeather.append(
-    createForecastContainer(),
-    createForecastContainer(),
-    createForecastContainer(),
-  );
+  for (let i = 0; i < forecastDays; i += 1) {
+    forecasteWeather.append(createForecastContainer(i));
+  }
 
   return forecasteWeather;
 };
