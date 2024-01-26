@@ -20,13 +20,15 @@ const createWeatherMini = () => {
   const icon = document.createElement('img');
   const temperatureC = document.createElement('p');
   const temperatureF = document.createElement('p');
+  const time = document.createElement('p');
 
   miniContainer.classList = 'mini';
   icon.classList = 'icon';
   temperatureC.classList = 'temperatureC';
   temperatureF.classList = 'temperatureF';
+  time.classList = 'time';
 
-  miniContainer.append(icon, temperatureC, temperatureF);
+  miniContainer.append(icon, temperatureC, temperatureF, time);
 
   return miniContainer;
 };
@@ -43,12 +45,12 @@ const createCurrentWeather = () => {
 
   currentWeather.classList = 'current';
   detailsContainer.classList = 'details';
-  condition.classList = 'detail condition';
-  feelsLikeC.classList = 'detail feelsLikeC';
-  feelsLikeF.classList = 'detail feelsLikeF';
-  humidity.classList = 'detail humidity';
-  windKPH.classList = 'detail windKPH';
-  windMPH.classList = 'detail windMPH';
+  condition.classList = 'condition';
+  feelsLikeC.classList = 'feelsLikeC';
+  feelsLikeF.classList = 'feelsLikeF';
+  humidity.classList = 'humidity';
+  windKPH.classList = 'windKPH';
+  windMPH.classList = 'windMPH';
 
   detailsContainer.append(
     condition,
@@ -65,16 +67,19 @@ const createCurrentWeather = () => {
 
 const createMain = () => {
   const main = document.createElement('main');
+  const search = document.createElement('div');
   const searchInput = document.createElement('input');
   const searchButton = document.createElement('button');
   const currentWeather = createCurrentWeather();
 
+  search.classList = 'search';
   searchInput.setAttribute('type', 'text');
   searchInput.setAttribute('id', 'search-input');
   searchInput.setAttribute('placeholder', 'Enter a city name');
   searchButton.textContent = 'Get weather';
 
-  main.append(searchInput, searchButton, currentWeather);
+  search.append(searchInput, searchButton);
+  main.append(search, currentWeather);
 
   return main;
 };

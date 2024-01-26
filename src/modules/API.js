@@ -36,6 +36,7 @@ const changeWeather = (location) => {
     const icon = document.querySelector('.current .icon');
     const temperatureC = document.querySelector('.current .temperatureC');
     const temperatureF = document.querySelector('.current .temperatureF');
+    const time = document.querySelector('.current .time');
 
     const condition = document.querySelector('.current .condition');
     const feelsLikeC = document.querySelector('.current .feelsLikeC');
@@ -47,6 +48,7 @@ const changeWeather = (location) => {
     icon.src = weather.icon;
     temperatureC.textContent = `${weather.tempC}°C`;
     temperatureF.textContent = `${weather.tempF}°F`;
+    time.textContent = weather.time;
 
     condition.textContent = weather.condition;
     feelsLikeC.textContent = `Feels Like: ${weather.feelsLikeC}°C`;
