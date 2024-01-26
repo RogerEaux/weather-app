@@ -1,4 +1,5 @@
 import weatherReport from '../images/weather.svg';
+import changeWeather from './API';
 
 const createHeader = () => {
   const header = document.createElement('header');
@@ -17,6 +18,7 @@ const createHeader = () => {
 
 const createWeatherMini = () => {
   const miniContainer = document.createElement('div');
+  const temperatureContainer = document.createElement('div');
   const icon = document.createElement('img');
   const temperatureC = document.createElement('p');
   const temperatureF = document.createElement('p');
@@ -24,13 +26,15 @@ const createWeatherMini = () => {
   const time = document.createElement('p');
 
   miniContainer.classList = 'mini';
+  temperatureContainer.classList = 'temp';
   icon.classList = 'icon';
   temperatureC.classList = 'temperatureC';
   temperatureF.classList = 'temperatureF';
   location.classList = 'location';
   time.classList = 'time';
 
-  miniContainer.append(icon, temperatureC, temperatureF, location, time);
+  temperatureContainer.append(icon, temperatureC, temperatureF);
+  miniContainer.append(temperatureContainer, location, time);
 
   return miniContainer;
 };
@@ -79,6 +83,11 @@ const createMain = () => {
   searchInput.setAttribute('id', 'search-input');
   searchInput.setAttribute('placeholder', 'Enter a city name');
   searchButton.textContent = 'Get weather';
+  searchButton.addEventListener('click', () => {
+    const input = document.getElementById('search-input');
+    changeWeather(input.value);
+    input.value = '';
+  });
 
   search.append(searchInput, searchButton);
   main.append(search, currentWeather);
