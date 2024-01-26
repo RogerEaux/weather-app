@@ -16,25 +16,53 @@ const createHeader = () => {
   return header;
 };
 
-const createWeatherMini = () => {
-  const miniContainer = document.createElement('div');
-  const temperatureContainer = document.createElement('div');
+const createMaxMinContainer = () => {
+  const maxMinContainer = document.createElement('div');
+  const maxC = document.createElement('p');
+  const maxF = document.createElement('p');
+  const minC = document.createElement('p');
+  const minF = document.createElement('p');
+
+  maxMinContainer.classList = 'maxMin';
+  maxC.classList = 'maxC';
+  maxF.classList = 'maxF';
+  minC.classList = 'minC';
+  minF.classList = 'minF';
+
+  maxMinContainer.append(maxC, maxF, minC, minF);
+
+  return maxMinContainer;
+};
+
+const createTempContainer = () => {
+  const tempContainer = document.createElement('div');
   const icon = document.createElement('img');
   const temperatureC = document.createElement('p');
   const temperatureF = document.createElement('p');
+  const maxMinContainer = createMaxMinContainer();
+
+  tempContainer.classList = 'temp';
+  icon.classList = 'icon';
+  temperatureC.classList = 'temperatureC';
+  temperatureF.classList = 'temperatureF';
+
+  tempContainer.append(icon, temperatureC, temperatureF, maxMinContainer);
+
+  return tempContainer;
+};
+
+const createWeatherMini = () => {
+  const miniContainer = document.createElement('div');
+  const tempContainer = createTempContainer();
   const location = document.createElement('p');
   const time = document.createElement('p');
 
   miniContainer.classList = 'mini';
-  temperatureContainer.classList = 'temp';
-  icon.classList = 'icon';
-  temperatureC.classList = 'temperatureC';
-  temperatureF.classList = 'temperatureF';
+
   location.classList = 'location';
   time.classList = 'time';
 
-  temperatureContainer.append(icon, temperatureC, temperatureF);
-  miniContainer.append(temperatureContainer, location, time);
+  miniContainer.append(tempContainer, location, time);
 
   return miniContainer;
 };
