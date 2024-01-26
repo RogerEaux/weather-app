@@ -160,10 +160,20 @@ const createForecastDetailsContainer = () => {
 
 const createForecastContainer = (index) => {
   const forecastContainer = document.createElement('div');
+  const day = document.createElement('h2');
 
   forecastContainer.classList = `day day${index}`;
+  day.classList = 'dayName';
+  if (index === 0) {
+    day.textContent = 'Today';
+  } else if (index === 1) {
+    day.textContent = 'Tomorrow';
+  } else {
+    day.textContent = 'The future';
+  }
 
   forecastContainer.append(
+    day,
     createMaxMinContainer(),
     createForecastDetailsContainer(),
   );

@@ -19,21 +19,19 @@
 
 body {
   height: 100vh;
-  width: 100vw;
   flex-direction: column;
   display: flex;
 }
 
 header {
   display: flex;
+  justify-content: space-between;
   padding: 16px;
   background: linear-gradient(white, var(--light-blue), var(--blue));
 }
 
 header > div {
-  flex: 4;
   display: flex;
-  justify-content: start;
   align-items: center;
   gap: 16px;
   font-size: 1.2rem;
@@ -47,12 +45,12 @@ header > div > img {
 }
 
 header > button {
-  flex: 1;
   align-self: center;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--dark-blue);
   background: none;
+  margin-right: 4rem;
   border: none;
   cursor: pointer;
 }
@@ -124,16 +122,15 @@ main {
 }
 
 .current {
-  height: 200px;
   display: flex;
   align-self: center;
   justify-self: center;
   gap: 8px;
+  color: var(--dark-blue);
   padding: 8px;
   border: 2px solid var(--blue);
   border-radius: 5px;
   box-shadow: var(--shadow);
-  color: var(--dark-blue);
 }
 
 .current > * {
@@ -141,7 +138,6 @@ main {
 }
 
 .mini {
-  height: 175px;
   display: grid;
   grid-template:
     'tempCon' 1fr
@@ -162,7 +158,7 @@ main {
 }
 
 .mini .icon {
-  transform: scale(1.5);
+  transform: scale(1.6);
   grid-area: icon;
 }
 
@@ -191,8 +187,7 @@ main {
   grid-area: time;
 }
 
-.details {
-  height: 175px;
+.current .details {
   display: grid;
   grid-template:
     'feels' 1fr
@@ -204,50 +199,89 @@ main {
   padding: 16px;
 }
 
-.details .feelsLikeC,
-.details .feelsLikeF {
+.current .details .feelsLikeC,
+.current .details .feelsLikeF {
   grid-area: feels;
 }
 
-.details .windKPH,
-.details .windMPH {
+.current .details .windKPH,
+.current .details .windMPH {
   grid-area: wind;
 }
 
 .forecast {
   grid-area: forecast;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
-.forecast .day {
+.day {
   display: flex;
   flex-direction: column;
+  align-self: center;
+  justify-self: center;
+  font-size: 0.9rem;
   color: var(--dark-blue);
+  padding: 8px;
+  border: 2px solid var(--blue);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
 }
 
-.forecast .day .maxMin {
+.day .dayName {
+  font-size: 1.2rem;
+  padding: 16px;
+  padding-bottom: 0;
+}
+
+.maxMin {
   display: grid;
   grid-template:
     'icon max' 1fr
     'icon min' 1fr;
-  font-size: 0.9rem;
-  gap: 4px;
   align-items: center;
+  gap: 4px;
+  padding: 16px;
 }
 
-.forecast .day .maxMin .icon {
+.maxMin .icon {
+  transform: scale(1.3);
   grid-area: icon;
 }
 
-.forecast .day .maxMin .maxC,
-.forecast .day .maxMin .maxF {
+.maxMin .maxC,
+.maxMin .maxF {
   grid-area: max;
 }
 
-.forecast .day .maxMin .minC,
-.forecast .day .maxMin .minF {
+.maxMin .minC,
+.maxMin .minF {
   grid-area: min;
+}
+
+.day .details {
+  display: grid;
+  grid-template:
+    'precipitation' 1fr
+    'humidity' 1fr
+    'wind' 1fr;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  padding-top: 0;
+}
+
+.day .details .precipitation {
+  grid-area: precipitation;
+}
+
+.day .details .humidity {
+  grid-area: humidity;
+}
+
+.day .details .maxWindKPH,
+.day .details .maxWindMPH {
+  grid-area: wind;
 }
 
 .hidden {
