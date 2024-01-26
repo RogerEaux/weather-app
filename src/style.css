@@ -91,6 +91,14 @@ main {
   cursor: pointer;
 }
 
+.search button:hover {
+  filter: brightness(90%);
+}
+
+.search button:active {
+  filter: brightness(80%);
+}
+
 .current {
   display: flex;
   justify-content: center;
@@ -98,15 +106,16 @@ main {
 }
 
 .current > * {
-  justify-self: center;
+  align-self: center;
 }
 
 .mini {
+  height: 150px;
   display: grid;
   grid-template:
-    'icon temp' 1fr
-    'location location' 1.2rem
-    '. time' 1.2rem;
+    'tempCon' 1fr
+    'location' max-content
+    'time' max-content;
   align-items: center;
   gap: 4px;
   padding: 16px;
@@ -115,8 +124,12 @@ main {
   box-shadow: var(--shadow);
 }
 
-.mini * {
-  justify-self: end;
+.mini .temp {
+  grid-area: tempCon;
+  display: grid;
+  grid-template: 'icon temp';
+  align-items: center;
+  justify-self: start;
 }
 
 .mini .icon {
@@ -135,29 +148,27 @@ main {
 
 .mini .location {
   grid-area: location;
+  justify-self: end;
 }
 
 .mini .time {
   grid-area: time;
+  justify-self: end;
 }
 
 .details {
-  width: max-content;
+  height: 150px;
   display: grid;
   grid-template:
     'condition' 1fr
     'feels' 1fr
     'humidity' 1fr
     'wind' 1fr;
-  gap: 4px;
+  gap: 12px;
   padding: 16px;
   border: 2px solid var(--blue);
   border-radius: 5px;
   box-shadow: var(--shadow);
-}
-
-.details > * {
-  align-self: center;
 }
 
 .details .feelsLikeC,
