@@ -22,7 +22,7 @@ const getWeather = async (location) => {
   weather.windMPH = allWeather.current.wind_mph;
   weather.condition = allWeather.current.condition.text;
   weather.icon = allWeather.current.condition.icon;
-  weather.city = allWeather.location.city;
+  weather.city = allWeather.location.name;
   weather.region = allWeather.location.region;
   [, weather.time] = allWeather.current.last_updated.split(' ');
 
@@ -36,6 +36,7 @@ const changeWeather = (location) => {
     const icon = document.querySelector('.current .icon');
     const temperatureC = document.querySelector('.current .temperatureC');
     const temperatureF = document.querySelector('.current .temperatureF');
+    const fullLocation = document.querySelector('.current .location');
     const time = document.querySelector('.current .time');
 
     const condition = document.querySelector('.current .condition');
@@ -48,6 +49,7 @@ const changeWeather = (location) => {
     icon.src = weather.icon;
     temperatureC.textContent = `${weather.tempC}°C`;
     temperatureF.textContent = `${weather.tempF}°F`;
+    fullLocation.textContent = `${weather.city}, ${weather.region}`;
     time.textContent = weather.time;
 
     condition.textContent = weather.condition;

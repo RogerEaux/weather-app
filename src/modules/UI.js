@@ -20,15 +20,17 @@ const createWeatherMini = () => {
   const icon = document.createElement('img');
   const temperatureC = document.createElement('p');
   const temperatureF = document.createElement('p');
+  const location = document.createElement('p');
   const time = document.createElement('p');
 
   miniContainer.classList = 'mini';
   icon.classList = 'icon';
   temperatureC.classList = 'temperatureC';
   temperatureF.classList = 'temperatureF';
+  location.classList = 'location';
   time.classList = 'time';
 
-  miniContainer.append(icon, temperatureC, temperatureF, time);
+  miniContainer.append(icon, temperatureC, temperatureF, location, time);
 
   return miniContainer;
 };
