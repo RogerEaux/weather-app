@@ -13,8 +13,6 @@ const getAllWeather = async (location) => {
 const getCurrentWeather = (allWeather) => {
   const current = {};
 
-  console.log(current);
-
   [, current.time] = allWeather.current.last_updated.split(' ');
   current.tempC = allWeather.current.temp_c;
   current.tempF = allWeather.current.temp_f;
@@ -22,7 +20,7 @@ const getCurrentWeather = (allWeather) => {
   current.feelsLikeF = allWeather.current.feelslike_f;
   current.precipitation =
     allWeather.forecast.forecastday[0].hour[
-      current.time.slice(0, 2)
+      parseInt(current.time.slice(0, 2), 10)
     ].chance_of_rain;
   current.humidity = allWeather.current.humidity;
   current.windKPH = allWeather.current.wind_kph;
