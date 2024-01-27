@@ -1,3 +1,6 @@
+import heavyWeather from '../images/heavy-weather.jpg';
+import menacing from '../images/menacing.png';
+
 const getAllWeather = async (location) => {
   const key = '219ec63ed2a0417982e43106241901';
 
@@ -144,6 +147,38 @@ const showError = () => {
   }, 2500);
 };
 
+const showWeatherReport = () => {
+  const body = document.querySelector('body');
+  const header = document.querySelector('header');
+  const main = document.querySelector('main');
+  const footer = document.querySelector('footer');
+  const img = document.createElement('img');
+  const heavy = document.createElement('div');
+
+  heavy.classList = 'heavy';
+  img.src = heavyWeather;
+  header.classList.toggle('faded');
+  main.classList.toggle('faded');
+  footer.classList.toggle('faded');
+
+  heavy.append(img);
+  for (let i = 0; i < 7; i += 1) {
+    const menacingImg = document.createElement('img');
+
+    menacingImg.src = menacing;
+
+    heavy.append(menacingImg);
+  }
+  body.append(heavy);
+
+  setTimeout(() => {
+    header.classList.toggle('faded');
+    main.classList.toggle('faded');
+    footer.classList.toggle('faded');
+    body.removeChild(heavy);
+  }, 3000);
+};
+
 const changeWeather = (location) => {
   getWeather(location)
     .then((weather) => {
@@ -151,6 +186,7 @@ const changeWeather = (location) => {
       changeCurrentDetails(weather);
       changeForecastMaxMin(weather);
       changeForecastDetails(weather);
+      showWeatherReport();
     })
     .catch(() => {
       showError();
