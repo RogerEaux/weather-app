@@ -29,6 +29,7 @@ const getCurrentWeather = (allWeather) => {
   current.windMPH = allWeather.current.wind_mph;
   current.condition = allWeather.current.condition.text;
   current.icon = allWeather.current.condition.icon;
+  current.code = allWeather.current.condition.code;
   current.city = allWeather.location.name;
   current.region = allWeather.location.region;
 
@@ -45,6 +46,8 @@ const getForecastWeather = (allWeather) => {
     forecast.days.push({});
     forecast.days[i].icon =
       allWeather.forecast.forecastday[i].day.condition.icon;
+    forecast.days[i].code =
+      allWeather.forecast.forecastday[i].day.condition.code;
     forecast.days[i].maxC = allWeather.forecast.forecastday[i].day.maxtemp_c;
     forecast.days[i].maxF = allWeather.forecast.forecastday[i].day.maxtemp_f;
     forecast.days[i].minC = allWeather.forecast.forecastday[i].day.mintemp_c;
@@ -71,7 +74,40 @@ const getWeather = async (location) => {
   return weather;
 };
 
+const determineBackground = (code) => {
+  const clear = [1000];
+  const cloudy = [1003, 1006];
+  const foggy = [1135, 1147];
+  const snowy = [1066, 1069, 1072, 1114, 1117, 1210, 1213, 1255, 1261, 1279];
+  const snowier = [1216, 1219, 1222, 1225, 1237, 1258, 1264, 1282];
+  const rainy = [
+    1150, 1153, 1168, 1171, 1180, 1183, 1198, 1204, 1240, 1249, 1273,
+  ];
+
+  if (clear.includes(code)) {
+    return 'clear';
+  }
+  if (cloudy.includes(code)) {
+    return 'cloudy';
+  }
+  if (foggy.includes(code)) {
+    return 'foggy';
+  }
+  if (snowy.includes(code)) {
+    return 'snowy';
+  }
+  if (snowier.includes(code)) {
+    return 'snowier';
+  }
+  if (rainy.includes(code)) {
+    return 'rainy';
+  }
+
+  return 'rainier';
+};
+
 const changeCurrentMini = (weather) => {
+  const current = document.querySelector('.current');
   const icon = document.querySelector('.current .icon');
   const temperatureC = document.querySelector('.current .temperatureC');
   const temperatureF = document.querySelector('.current .temperatureF');
@@ -79,6 +115,7 @@ const changeCurrentMini = (weather) => {
   const fullLocation = document.querySelector('.current .location');
   const time = document.querySelector('.current .time');
 
+  current.classList = `current ${determineBackground(weather.current.code)}`;
   icon.src = weather.current.icon;
   temperatureC.textContent = `${weather.current.tempC}°C`;
   temperatureF.textContent = `${weather.current.tempF}°F`;
@@ -105,12 +142,14 @@ const changeCurrentDetails = (weather) => {
 
 const changeForecastMaxMin = (weather) => {
   weather.forecast.days.forEach((day, index) => {
+    const forecastDay = document.querySelector(`.forecast .day${index}`);
     const icon = document.querySelector(`.forecast .day${index} .icon`);
     const maxC = document.querySelector(`.forecast .day${index} .maxC`);
     const maxF = document.querySelector(`.forecast .day${index} .maxF`);
     const minC = document.querySelector(`.forecast .day${index} .minC`);
     const minF = document.querySelector(`.forecast .day${index} .minF`);
 
+    forecastDay.classList = `day day${index} ${determineBackground(day.code)}`;
     icon.src = day.icon;
     maxC.textContent = `Max: ${day.maxC}°C`;
     maxF.textContent = `Max: ${day.maxF}°F`;

@@ -1,14 +1,6 @@
 import weatherReport from '../images/weather.svg';
 import changeWeather from './API';
 
-const handleChangeTempUnits = () => {
-  const units = document.querySelectorAll('.unit');
-
-  units.forEach((unit) => {
-    unit.classList.toggle('hidden');
-  });
-};
-
 const createHeader = () => {
   const header = document.createElement('header');
   const headerContainer = document.createElement('div');
@@ -19,7 +11,13 @@ const createHeader = () => {
   logo.src = weatherReport;
   title.textContent = 'Weather Report';
   CtoF.textContent = 'C/F';
-  CtoF.addEventListener('click', handleChangeTempUnits);
+  CtoF.addEventListener('click', () => {
+    const units = document.querySelectorAll('.unit');
+
+    units.forEach((unit) => {
+      unit.classList.toggle('hidden');
+    });
+  });
 
   headerContainer.append(logo, title);
   header.append(headerContainer, CtoF);
