@@ -6,7 +6,6 @@ const getAllWeather = async (location) => {
   );
   const weather = await unformattedWeather.json();
 
-  console.log(weather);
   return weather;
 };
 
@@ -136,14 +135,26 @@ const changeForecastDetails = (weather) => {
   });
 };
 
+const showError = () => {
+  const error = document.querySelector('.error');
+
+  error.classList.toggle('hidden');
+  setTimeout(() => {
+    error.classList.toggle('hidden');
+  }, 2500);
+};
+
 const changeWeather = (location) => {
-  getWeather(location).then((weather) => {
-    console.log(weather);
-    changeCurrentMini(weather);
-    changeCurrentDetails(weather);
-    changeForecastMaxMin(weather);
-    changeForecastDetails(weather);
-  });
+  getWeather(location)
+    .then((weather) => {
+      changeCurrentMini(weather);
+      changeCurrentDetails(weather);
+      changeForecastMaxMin(weather);
+      changeForecastDetails(weather);
+    })
+    .catch(() => {
+      showError();
+    });
 };
 
 export default changeWeather;

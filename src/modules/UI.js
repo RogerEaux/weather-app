@@ -31,6 +31,7 @@ const createSearch = () => {
   const search = document.createElement('div');
   const searchInput = document.createElement('input');
   const searchButton = document.createElement('button');
+  const error = document.createElement('p');
 
   search.classList = 'search';
   searchInput.setAttribute('type', 'text');
@@ -42,8 +43,10 @@ const createSearch = () => {
     changeWeather(input.value);
     input.value = '';
   });
+  error.classList = 'hidden error';
+  error.textContent = 'Please enter a valid city';
 
-  search.append(searchInput, searchButton);
+  search.append(searchInput, searchButton, error);
 
   return search;
 };
