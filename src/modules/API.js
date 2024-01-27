@@ -1,5 +1,8 @@
 import heavyWeather from '../images/heavy-weather.jpg';
 import menacing from '../images/menacing.png';
+import weatherReport1 from '../audios/weatherReport1.wav';
+import weatherReport2 from '../audios/weatherReport2.wav';
+import weatherReport3 from '../audios/weatherReport3.wav';
 
 const getAllWeather = async (location) => {
   const key = '219ec63ed2a0417982e43106241901';
@@ -193,13 +196,20 @@ const showWeatherReport = () => {
   const footer = document.querySelector('footer');
   const img = document.createElement('img');
   const heavy = document.createElement('div');
+  const audio = document.createElement('audio');
+  const audios = [weatherReport1, weatherReport2, weatherReport3];
+  const chosenAudio = document.createElement('source');
 
   heavy.classList = 'heavy';
   img.src = heavyWeather;
   header.classList.toggle('faded');
   main.classList.toggle('faded');
   footer.classList.toggle('faded');
+  chosenAudio.setAttribute('type', 'audio/wav');
+  chosenAudio.src = audios[Math.floor(Math.random() * 3)];
 
+  audio.setAttribute('autoplay', '');
+  audio.append(chosenAudio);
   heavy.append(img);
   for (let i = 0; i < 7; i += 1) {
     const menacingImg = document.createElement('img');
@@ -208,6 +218,7 @@ const showWeatherReport = () => {
 
     heavy.append(menacingImg);
   }
+  heavy.append(audio);
   body.append(heavy);
 
   setTimeout(() => {
